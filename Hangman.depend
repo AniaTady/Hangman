@@ -1,4 +1,5 @@
 # depslib dependency file v1.0
-1699457348 source:c:\users\osobisty\desktop\projekty\hangman\main.cpp
+1699536430 source:c:\users\osobisty\desktop\projekty\hangman\main.cpp
 	<iostream>
+	<sstream>
 
