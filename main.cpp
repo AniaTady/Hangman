@@ -11,9 +11,10 @@ void beginGame(string secretWord);
 void printEmptyGallows();
 void printHiddenWord(string secretWord);
 void printGuesses(string correctLetters);
-bool isMistake(char guessedChar, string correctLatters);
+bool isMistake(char guessedChar, string correctLatters, string secretWord);
 bool isLatinLatter(char guessedChar);
 bool wasAlreadyProposed(string correctLatters, char guessedChar);
+bool foundInSecretWord(string secretWord, char guessedChar);
 int n = 2;
 int main()
 {
@@ -41,7 +42,7 @@ void doSingleTest()
         char guessedChar;
         sin >> guessedChar;
         cout << "Your choice: " << guessedChar << endl;
-        bool isLetterWrong = isMistake(guessedChar, correctLetters);
+        bool isLetterWrong = isMistake(guessedChar, correctLetters, secretWord);
     }
 
 }
@@ -95,7 +96,7 @@ void printGuesses(string correctLetters)
     }
 }
 //TO DO
-bool isMistake(char guessedChar, string correctLatters)
+bool isMistake(char guessedChar, string correctLatters, string secretWord)
 {
     if(not isLatinLatter(guessedChar))
     {
@@ -105,6 +106,11 @@ bool isMistake(char guessedChar, string correctLatters)
     if(wasAlreadyProposed(correctLatters, guessedChar))
     {
         cout << "You've already guessed that letter!" << endl;
+        return true;
+    }
+    if(not foundInSecretWord(secretWord, guessedChar))
+    {
+        cout << "Nope!" << endl;
         return true;
     }
     return false;
@@ -123,13 +129,23 @@ bool isLatinLatter(char guessedChar)
     }
     return false;
 }
-//TODO
+//DONE
 bool wasAlreadyProposed(string correctLatters, char guessedChar)
 {
-    std::size_t found = correctLatters.find(guessedChar);
-    if (found != std::string::npos)
+    size_t found = correctLatters.find(guessedChar);
+    if (found != string::npos)
     {
         return true;
     }
     return false;
+}
+//DONE
+bool foundInSecretWord(string secretWord, char guessedChar)
+{
+    size_t found = secretWord.find(guessedChar);
+    if (found == string::npos)
+    {
+        return false;
+    }
+    return true;
 }
