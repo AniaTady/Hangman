@@ -15,6 +15,8 @@ bool isMistake(char guessedChar, string correctLatters, string secretWord);
 bool isLatinLatter(char guessedChar);
 bool wasAlreadyProposed(string correctLatters, char guessedChar);
 bool foundInSecretWord(string secretWord, char guessedChar);
+bool isItWon(string secretWord, char guessedChar, string correctLatters);
+bool isTheLetterGuessed(char singleLetter, string correctLatters);
 int n = 2;
 int main()
 {
@@ -43,8 +45,15 @@ void doSingleTest()
         sin >> guessedChar;
         cout << "Your choice: " << guessedChar << endl;
         bool isLetterWrong = isMistake(guessedChar, correctLetters, secretWord);
+        if(isItWon(secretWord, guessedChar, correctLetters))
+        {
+            cout << endl;
+        }
+        else
+        {
+            cout << "Nice!" << endl;
+        }
     }
-
 }
 //DONE
 void beginGame(string secretWord)
@@ -95,7 +104,7 @@ void printGuesses(string correctLetters)
         cout << "Guesses: " << correctLetters << endl;
     }
 }
-//TO DO
+//DONE
 bool isMistake(char guessedChar, string correctLatters, string secretWord)
 {
     if(not isLatinLatter(guessedChar))
@@ -148,4 +157,28 @@ bool foundInSecretWord(string secretWord, char guessedChar)
         return false;
     }
     return true;
+}
+//DONE
+bool isItWon(string secretWord, char guessedChar, string correctLatters)
+{
+    bool areAllTheLettersGuessed = true;
+    for(int i = 0; i < secretWord.size(); i++)
+    {
+        if(isTheLetterGuessed(secretWord[i], correctLatters))
+        {
+            areAllTheLettersGuessed = false;
+            break;
+        }
+    }
+    return areAllTheLettersGuessed;
+}
+//DONE
+bool isTheLetterGuessed(char singleLetter, string correctLatters)
+{
+    size_t found = correctLatters.find(singleLetter);
+    if (found != string::npos)
+    {
+        return true;
+    }
+    return false;
 }
