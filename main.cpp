@@ -17,6 +17,7 @@ bool wasAlreadyProposed(string correctLatters, char guessedChar);
 bool foundInSecretWord(string secretWord, char guessedChar);
 bool isItWon(string secretWord, char guessedChar, string correctLatters);
 bool isTheLetterGuessed(char singleLetter, string correctLatters);
+void printHangman(int mistakesLeft);
 int n = 2;
 int main()
 {
@@ -53,7 +54,14 @@ void doSingleTest()
         {
             cout << "Nice!" << endl;
         }
+        //KONTYNUACJA 6a?
+        if(isLetterWrong == true)
+        {
+            mistakesLeft -= 1;
+            printHangman(mistakesLeft);
+        }
     }
+
 }
 //DONE
 void beginGame(string secretWord)
@@ -181,4 +189,155 @@ bool isTheLetterGuessed(char singleLetter, string correctLatters)
         return true;
     }
     return false;
+}
+//TO DO
+void printHangman(int mistakesLeft)
+{
+    switch(mistakesLeft)
+    {
+    case 7:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/               |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 6:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |          |     |
+|    |          &     |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 5:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |         (_)    |
+|    |          &     |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 4:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |         (_)    |
+|    |          &     |
+|    |          |     |
+|    |          |     |
+|    |          |     |
+|    |                |
+|    |                |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 3:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |         (_)    |
+|    |          &     |
+|    |         /|     |
+|    |        / |     |
+|    |          |     |
+|    |                |
+|    |                |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 2:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |         (_)    |
+|    |          &     |
+|    |         /|\    |
+|    |        / | \   |
+|    |          |     |
+|    |                |
+|    |                |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 1:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |         (_)    |
+|    |          &     |
+|    |         /|\    |
+|    |        / | \   |
+|    |          |     |
+|    |         /      |
+|    |        /       |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    case 0:
+        cout <<
+R"(+---------------------+
+|    ____________     |
+|    |/         |     |
+|    |          |     |
+|    |         (_)    |
+|    |          &     |
+|    |         /|\    |
+|    |        / | \   |
+|    |          |     |
+|    |         / \    |
+|    |        /   \   |
+|    |                |
+|  __|__              |
++---------------------+
+)";
+        break;
+    }
 }
